@@ -50,8 +50,10 @@
         function incrementCounter() {
             counterDiv.textContent = counter;
             counter++;
-
-            if (counter > 100) {
+            if(counter <10){
+            counter = "0"+counter;
+            }
+            if (counter > 99) {
                 counter = 0;
             }
             setTimeout(incrementCounter, currentTimeout);

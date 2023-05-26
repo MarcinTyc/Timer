@@ -11,6 +11,22 @@
             font-family: Arial, sans-serif;
             background-color: #0088E8;
         }
+
+#counter-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        #counter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.5);
+        }
         #counter {
             font-size: 200px;
             color: #DFFF00;

@@ -12,7 +12,7 @@
             background-color: #0088E8;
         }
 
-#counter-card {
+        #counter-card {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,23 +23,41 @@
             box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
+
         #counter-card:hover {
             transform: translateY(-10px);
             box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.5);
         }
+
         #counter {
             font-size: 200px;
             color: #DFFF00;
             background-color: rgb(19, 19, 18);
             padding: 10px 30px;
         }
+
         .buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
         }
+
         .buttons button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #20FF00;
+            border: none;
+        }
+
+        #toggle-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        #toggle-buttons button {
             padding: 10px 20px;
             font-size: 20px;
             cursor: pointer;
@@ -49,6 +67,10 @@
     </style>
 </head>
 <body>
+    <div id="toggle-buttons">
+        <button id="normalCount">Normal Count</button>
+        <button id="randomCount">Random Count</button>
+    </div>
     <div id="counter"></div>
     <div class="buttons">
         <button id="speed08">0.8s</button>
@@ -64,20 +86,31 @@
         let counter = 0;
         let counterDiv = document.getElementById('counter');
         let currentTimeout = 1000;  // start with 1 second delay
+        let isRandom = false;  // initialize the count mode to normal
 
         function incrementCounter() {
-            counterDiv.textContent = counter;
-            counter++;
-            if(counter <10){
-            counter = "0"+counter;
+            if (isRandom) {
+                counter = Math.floor(Math.random() * 100);  // generate random number from 0 to 99
+            } else {
+                counter++;
+                if (counter > 99) {
+                    counter = 0;
+                }
             }
-            if (counter > 99) {
-                counter = 0;
-            }
+
+            counterDiv.textContent = counter < 10 ? '0' + counter : counter;
             setTimeout(incrementCounter, currentTimeout);
         }
 
         incrementCounter();
+
+        document.getElementById('normalCount').onclick = function() {
+            isRandom = false;  // set the count mode to normal
+        }
+
+        document.getElementById('randomCount').onclick = function() {
+            isRandom = true;  // set the count mode to random
+        }
 
         document.getElementById('speed08').onclick = function() {
             currentTimeout = 800;  // 0.8 seconds
